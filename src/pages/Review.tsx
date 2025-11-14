@@ -1,11 +1,15 @@
 import { ArrowLeft, Plane, ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import PageHeader from "@/components/PageHeader";
 import BottomNav from "@/components/BottomNav";
 import { Button } from "@/components/ui/button";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import airplaneInterior from "@/assets/airplane-interior.jpg";
 
 const Review = () => {
   const navigate = useNavigate();
+  const [isCostSummaryOpen, setIsCostSummaryOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -92,34 +96,76 @@ const Review = () => {
             </div>
           </div>
           
-          <div className="bg-avelo-card-light rounded-2xl p-5">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-heading font-semibold">Cost Summary</h3>
-              <button>
-                <ChevronDown className="w-5 h-5 text-avelo-text-medium" />
-              </button>
+          <div className="bg-avelo-card-light rounded-2xl p-5 mb-4">
+            <div className="flex justify-between font-heading font-semibold text-lg">
+              <span>Total amount due</span>
+              <span>$1,136.37</span>
             </div>
-            
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span>Main x 1</span>
-                <span className="font-semibold">$1,010.58</span>
-              </div>
-              <div className="flex justify-between text-avelo-text-medium">
-                <span>Taxes and carrier imposed fees</span>
-                <span>$125.79</span>
-              </div>
-              <div className="flex justify-between font-semibold border-t border-border pt-2">
-                <span>Total amount</span>
-                <span>$1,136.37</span>
-              </div>
+          </div>
+          
+          <Collapsible open={isCostSummaryOpen} onOpenChange={setIsCostSummaryOpen}>
+            <div className="bg-avelo-card-light rounded-2xl p-5">
+              <CollapsibleTrigger className="w-full">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-heading font-semibold">Cost Summary</h3>
+                  <ChevronDown 
+                    className={`w-5 h-5 text-avelo-text-medium transition-transform duration-200 ${
+                      isCostSummaryOpen ? 'rotate-180' : ''
+                    }`}
+                  />
+                </div>
+              </CollapsibleTrigger>
+              
+              <CollapsibleContent>
+                <div className="space-y-2 text-sm mt-4">
+                  <div className="flex justify-between">
+                    <span>Main x 1</span>
+                    <span className="font-semibold">$1,010.58</span>
+                  </div>
+                  <div className="flex justify-between text-avelo-text-medium">
+                    <span>Taxes and carrier imposed fees</span>
+                    <span>$125.79</span>
+                  </div>
+                  <div className="flex justify-between font-semibold border-t border-border pt-2 mt-2">
+                    <span>Total fare</span>
+                    <span>$1,136.37</span>
+                  </div>
+                  
+                  <div className="mt-4 pt-2">
+                    <div className="font-semibold mb-2">Extras</div>
+                    <div className="flex justify-between text-avelo-text-medium">
+                      <span>Preferred Seat x 1</span>
+                      <span>$0.00</span>
+                    </div>
+                    <div className="flex justify-between text-avelo-text-medium mt-1">
+                      <span>Number of bags</span>
+                      <span>$25.79</span>
+                    </div>
+                    <div className="flex justify-between font-semibold border-t border-border pt-2 mt-2">
+                      <span>Total extras</span>
+                      <span>$25.79</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex justify-between font-semibold text-lg border-t border-border pt-3 mt-3">
+                    <span>Total amount due</span>
+                    <span>$1,136.37</span>
+                  </div>
+                </div>
+              </CollapsibleContent>
             </div>
-            
-            <div className="border-t border-border mt-3 pt-3">
-              <div className="flex justify-between font-heading font-semibold text-lg">
-                <span>Total amount due</span>
-                <span>$1,136.37</span>
-              </div>
+          </Collapsible>
+          
+          <div className="relative rounded-2xl overflow-hidden mt-6 mb-6">
+            <img 
+              src={airplaneInterior} 
+              alt="Airplane interior" 
+              className="w-full h-48 object-cover"
+            />
+            <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+              <h2 className="text-white font-heading text-2xl font-semibold text-center px-4">
+                Enjoy Convenient Air Travel with Us
+              </h2>
             </div>
           </div>
         </div>
