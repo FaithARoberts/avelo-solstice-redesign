@@ -31,52 +31,52 @@ const Account = () => {
               <div className="w-24 h-24 rounded-full bg-avelo-card-light flex items-center justify-center mb-3">
                 <User className="w-12 h-12 text-avelo-purple" />
               </div>
-              <p className="text-sm text-avelo-text-medium">Welcome Back User</p>
+              <p className="text-[13px] text-avelo-text-medium font-body">Welcome Back User</p>
             </div>
             
-            <div className="space-y-4">
+            <div className="space-y-7">
               <div>
-                <label className="block text-xs text-avelo-text-medium mb-1 font-body">
+                <label className="block text-[13px] text-avelo-text-medium mb-1 font-body">
                   Name
                 </label>
                 <Input
                   value="John Doe"
                   readOnly
-                  className="rounded-xl bg-muted border-none h-11 text-sm"
+                  className="rounded-2xl bg-avelo-card-light border-none h-11 text-base font-body"
                 />
               </div>
               
               <div>
-                <label className="block text-xs text-avelo-text-medium mb-1 font-body">
+                <label className="block text-[13px] text-avelo-text-medium mb-1 font-body">
                   Phone Number
                 </label>
                 <Input
                   value="(555) 123-4567"
                   readOnly
-                  className="rounded-xl bg-muted border-none h-11 text-sm"
+                  className="rounded-2xl bg-avelo-card-light border-none h-11 text-base font-body"
                 />
               </div>
               
               <div>
-                <label className="block text-xs text-avelo-text-medium mb-1 font-body">
+                <label className="block text-[13px] text-avelo-text-medium mb-1 font-body">
                   Email Address
                 </label>
                 <Input
                   value="bexhetz77@uorak.com"
                   readOnly
-                  className="rounded-xl bg-muted border-none h-11 text-sm text-ellipsis"
+                  className="rounded-2xl bg-avelo-card-light border-none h-11 text-base font-body text-ellipsis"
                 />
               </div>
               
               <div className="relative">
-                <label className="block text-xs text-avelo-text-medium mb-1 font-body">
+                <label className="block text-[13px] text-avelo-text-medium mb-1 font-body">
                   Password
                 </label>
                 <Input
                   type="password"
                   value="••••••••••"
                   readOnly
-                  className="rounded-xl bg-muted border-none h-11 text-sm pr-10"
+                  className="rounded-2xl bg-avelo-card-light border-none h-11 text-base font-body pr-10"
                 />
                 <button className="absolute right-3 top-8">
                   <Edit className="w-4 h-4 text-avelo-text-medium" />

@@ -21,7 +21,7 @@ const More = () => {
       
       <main className="flex-1 pb-24">
         <div className="max-w-md mx-auto">
-          <h1 className="text-3xl font-heading font-semibold text-avelo-purple text-center py-6">
+          <h1 className="text-[40px] font-heading font-semibold text-avelo-purple text-center py-6">
             More
           </h1>
           
@@ -30,7 +30,7 @@ const More = () => {
               <button
                 key={item.path}
                 onClick={() => navigate(item.path)}
-                className={`w-full flex items-center justify-between p-4 rounded-xl bg-background border transition-colors hover:bg-muted ${
+                className={`w-full flex items-center justify-between p-[18px] rounded-2xl bg-background border transition-colors hover:bg-muted ${
                   item.highlighted ? 'border-avelo-purple' : 'border-border'
                 }`}
               >
@@ -45,7 +45,7 @@ const More = () => {
           <div className="px-4 mt-8">
             <Button
               onClick={() => navigate("/login")}
-              className="w-full bg-avelo-purple hover:bg-avelo-purple/90 text-white font-heading text-lg py-6 rounded-2xl h-auto"
+              className="w-full bg-avelo-purple hover:bg-avelo-purple/90 text-white font-heading text-[20px] py-3 rounded-2xl h-auto"
             >
               Sign Out
             </Button>
