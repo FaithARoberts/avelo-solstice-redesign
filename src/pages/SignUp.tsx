@@ -40,19 +40,19 @@ const SignUp = () => {
           
           <form onSubmit={handleSubmit} className="space-y-3">
             <div>
-              <label className="block text-sm font-body text-avelo-text-medium mb-1">
+              <label className="block text-[13px] font-body text-avelo-text-medium mb-1">
                 Name
               </label>
               <Input
                 placeholder="Last Name"
                 value={formData.name}
                 onChange={(e) => setFormData({...formData, name: e.target.value})}
-                className="rounded-xl border-avelo-text-medium/30 h-11 text-sm"
+                className="rounded-2xl border-avelo-text-medium/30 h-11 text-base font-body focus-visible:ring-2 focus-visible:ring-avelo-purple focus-visible:border-avelo-purple"
               />
             </div>
             
             <div>
-              <label className="block text-sm font-body text-avelo-text-medium mb-1">
+              <label className="block text-[13px] font-body text-avelo-text-medium mb-1">
                 Email
               </label>
               <Input
@@ -60,12 +60,12 @@ const SignUp = () => {
                 placeholder="Enter Email Here"
                 value={formData.email}
                 onChange={(e) => setFormData({...formData, email: e.target.value})}
-                className="rounded-xl border-avelo-text-medium/30 h-11 text-sm"
+                className="rounded-2xl border-avelo-text-medium/30 h-11 text-base font-body focus-visible:ring-2 focus-visible:ring-avelo-purple focus-visible:border-avelo-purple"
               />
             </div>
             
             <div>
-              <label className="block text-sm font-body text-avelo-text-medium mb-1">
+              <label className="block text-[13px] font-body text-avelo-text-medium mb-1">
                 Password
               </label>
               <Input
@@ -73,12 +73,12 @@ const SignUp = () => {
                 placeholder="Enter Password Here"
                 value={formData.password}
                 onChange={(e) => setFormData({...formData, password: e.target.value})}
-                className="rounded-xl border-2 border-avelo-purple h-11 text-sm"
+                className="rounded-2xl border-avelo-text-medium/30 h-11 text-base font-body focus-visible:ring-2 focus-visible:ring-avelo-purple focus-visible:border-avelo-purple"
               />
             </div>
             
             <div>
-              <label className="block text-sm font-body text-avelo-text-medium mb-1">
+              <label className="block text-[13px] font-body text-avelo-text-medium mb-1">
                 Confirm Password
               </label>
               <Input
@@ -86,31 +86,31 @@ const SignUp = () => {
                 placeholder="Confirm Password Here"
                 value={formData.confirmPassword}
                 onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
-                className="rounded-xl border-avelo-text-medium/30 h-11 text-sm"
+                className="rounded-2xl border-avelo-text-medium/30 h-11 text-base font-body focus-visible:ring-2 focus-visible:ring-avelo-purple focus-visible:border-avelo-purple"
               />
             </div>
             
             <div>
-              <label className="block text-sm font-body text-avelo-text-medium mb-1">
+              <label className="block text-[13px] font-body text-avelo-text-medium mb-1">
                 Phone Number
               </label>
               <Input
                 type="tel"
-                placeholder="Last Name"
+                placeholder="555-555-5555"
                 value={formData.phone}
                 onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                className="rounded-xl border-avelo-text-medium/30 h-11 text-sm"
+                className="rounded-2xl border-avelo-text-medium/30 h-11 text-base font-body focus-visible:ring-2 focus-visible:ring-avelo-purple focus-visible:border-avelo-purple"
               />
             </div>
             
             <Button 
               type="submit"
-              className="w-full bg-avelo-purple hover:bg-avelo-purple/90 text-white font-heading text-lg py-5 rounded-2xl h-auto mt-4"
+              className="w-full bg-avelo-purple hover:bg-avelo-purple/90 text-white font-heading text-[20px] py-3 rounded-2xl h-auto mt-4"
             >
               Sign up
             </Button>
             
-            <div className="text-center text-xs text-avelo-text-medium pt-2">
+            <div className="text-center text-[13px] text-avelo-text-medium pt-2 font-body">
               <span>Already have an account?</span>
               <button
                 type="button"

@@ -16,12 +16,12 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-background border-4 border-avelo-purple rounded-3xl p-8 space-y-6">
+      <div className="w-full max-w-md bg-background border-[4px] border-avelo-purple rounded-3xl p-[18px] space-y-6">
         <AveloLogo />
         
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-body text-avelo-text-medium mb-2">
+            <label htmlFor="email" className="block text-[13px] font-body text-avelo-text-medium mb-1">
               Email
             </label>
             <Input
@@ -30,12 +30,12 @@ const Login = () => {
               placeholder="Enter Email Here"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-xl border-avelo-text-medium/30 h-12 text-base"
+              className="w-full rounded-2xl border-avelo-text-medium/30 h-11 text-base font-body"
             />
           </div>
           
           <div>
-            <label htmlFor="password" className="block text-sm font-body text-avelo-text-medium mb-2">
+            <label htmlFor="password" className="block text-[13px] font-body text-avelo-text-medium mb-1">
               Password
             </label>
             <Input
@@ -44,7 +44,7 @@ const Login = () => {
               placeholder="Enter Password Here"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-xl border-avelo-text-medium/30 h-12 text-base"
+              className="w-full rounded-2xl border-avelo-text-medium/30 h-11 text-base font-body"
             />
           </div>
           
@@ -55,7 +55,7 @@ const Login = () => {
           <Button
             type="button"
             variant="outline"
-            className="w-full h-12 rounded-xl border-avelo-text-medium/30 bg-background hover:bg-muted"
+            className="w-full h-11 rounded-2xl border-avelo-text-medium/30 bg-background hover:bg-muted font-body text-base"
           >
             <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -66,7 +66,7 @@ const Login = () => {
             Continue with Google
           </Button>
           
-          <div className="text-center text-xs text-avelo-text-medium space-x-2">
+          <div className="text-center text-[13px] text-avelo-text-medium space-x-2 font-body">
             <span>New to Avelo?</span>
             <button
               type="button"
@@ -86,7 +86,7 @@ const Login = () => {
           
           <Button 
             type="submit"
-            className="w-full bg-avelo-purple hover:bg-avelo-purple/90 text-white font-heading text-xl py-6 rounded-2xl h-auto"
+            className="w-full bg-avelo-purple hover:bg-avelo-purple/90 text-white font-heading text-[20px] py-3 rounded-2xl h-auto"
           >
             Login
           </Button>
