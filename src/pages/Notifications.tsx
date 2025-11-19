@@ -52,7 +52,7 @@ const Notifications = () => {
           <div className="pt-4 text-center">
             <a
               href="#"
-              className="text-base font-body text-avelo-purple underline hover:text-avelo-purple/80"
+              className="text-base font-body text-white underline hover:text-avelo-yellow"
             >
               Enable push notifications
             </a>
