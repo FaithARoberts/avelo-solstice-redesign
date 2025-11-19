@@ -31,7 +31,7 @@ const FlightStatus = () => {
             // Search Form
             <form onSubmit={handleSubmit} className="space-y-7">
               <div className="space-y-2">
-                <Label htmlFor="flightNumber" className="text-[13px] font-body text-avelo-text-light">
+                <Label htmlFor="flightNumber" className="text-[13px] font-body text-white">
                   Flight number
                 </Label>
                 <Input
@@ -43,7 +43,7 @@ const FlightStatus = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="date" className="text-[13px] font-body text-avelo-text-light">
+                <Label htmlFor="date" className="text-[13px] font-body text-white">
                   Date
                 </Label>
                 <Input
@@ -64,7 +64,7 @@ const FlightStatus = () => {
             // Results View
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <h2 className="text-2xl font-heading font-semibold text-avelo-purple">
+                <h2 className="text-2xl font-heading font-semibold text-white">
                   AV 123
                 </h2>
                 <StatusBadge status="on-time" />

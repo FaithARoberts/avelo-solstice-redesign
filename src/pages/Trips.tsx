@@ -37,7 +37,7 @@ const Trips = () => {
             View Flight Status
           </Button>
           
-          <p className="text-base font-body text-avelo-text-light text-center">
+          <p className="text-base font-body text-white text-center">
             Need to check-in? Flights you've already booked!
           </p>
           
