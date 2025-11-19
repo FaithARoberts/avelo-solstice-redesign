@@ -23,11 +23,11 @@ const FlightHistory = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-avelo-purple-dark flex flex-col">
       <PageHeader />
       
       <main className="flex-1 pb-24 px-4 pt-6">
-        <h1 className="text-[40px] font-heading font-semibold text-avelo-purple mb-7">
+        <h1 className="text-[40px] font-heading font-semibold text-white mb-7">
           Flight History
         </h1>
         

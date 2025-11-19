@@ -6,7 +6,7 @@ import QRCode from "react-qr-code";
 
 const BoardingPass = () => {
   return (
-    <div className="min-h-screen bg-[#310047] flex flex-col">
+    <div className="min-h-screen bg-avelo-purple-dark flex flex-col">
       <PageHeader />
       
       <main className="flex-1 pb-24 px-4 pt-6">
