@@ -38,7 +38,7 @@ const FlightStatus = () => {
                   id="flightNumber"
                   type="text"
                   placeholder="AV 123"
-                  className="h-11 bg-avelo-yellow border-none rounded-2xl text-base font-body focus-visible:ring-2 focus-visible:ring-avelo-purple placeholder:text-avelo-text-light"
+                  className="h-11 bg-avelo-yellow border-none rounded-2xl text-base font-body text-avelo-text-dark focus-visible:ring-2 focus-visible:ring-avelo-purple placeholder:text-avelo-text-dark"
                 />
               </div>
 
@@ -49,7 +49,7 @@ const FlightStatus = () => {
                 <Input
                   id="date"
                   type="date"
-                  className="h-11 bg-avelo-yellow border-none rounded-2xl text-base font-body focus-visible:ring-2 focus-visible:ring-avelo-purple"
+                  className="h-11 bg-avelo-yellow border-none rounded-2xl text-base font-body text-avelo-text-dark focus-visible:ring-2 focus-visible:ring-avelo-purple"
                 />
               </div>
 
