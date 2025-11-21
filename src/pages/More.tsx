@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 const menuItems = [
   { label: "Account Details", path: "/account" },
   { label: "Notification Settings", path: "/notifications" },
-  { label: "Payment Methods", path: "/payment", highlighted: true },
+  { label: "Payment Methods", path: "/payment-methods", highlighted: true },
   { label: "Contact Us", path: "/contact" },
   { label: "Terms & Conditions", path: "/terms" },
 ];
