@@ -46,7 +46,7 @@ const AddPaymentMethod = () => {
 
       {/* Form */}
       <main className="flex-1 pb-32 px-4 pt-8">
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-6">
+        <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-8">
           {/* Name */}
           <div>
             <Label htmlFor="name" className="text-sm font-body text-white mb-2 block">
@@ -114,7 +114,7 @@ const AddPaymentMethod = () => {
           {/* Submit Button */}
           <Button
             type="submit"
-            className="w-full bg-[#FECE00] hover:bg-[#FECE00]/90 text-[#000000] font-heading text-[20px] py-6 rounded-2xl h-auto mt-8"
+            className="w-full bg-[#FECE00] hover:bg-[#FECE00]/90 text-[#000000] font-heading text-[20px] py-6 rounded-2xl h-auto mt-10"
           >
             Add Card
           </Button>

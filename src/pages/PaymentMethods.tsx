@@ -60,7 +60,7 @@ const PaymentMethods = () => {
           >
             <ArrowLeft className="w-6 h-6" />
           </button>
-          <div className="h-12">
+          <div className="h-12 relative z-10">
             <AveloLogo showTagline={false} />
           </div>
           <div className="w-6" />
@@ -71,12 +71,13 @@ const PaymentMethods = () => {
       </div>
 
       {/* Cards List */}
-      <main className="flex-1 pb-32 px-4 pt-6">
-        <div className="max-w-md mx-auto space-y-4">
+      <main className="flex-1 pb-32 px-4 pt-8">
+        <div className="max-w-md mx-auto space-y-6">
           {cards.map((card) => (
-            <div
+            <button
               key={card.id}
-              className="bg-[#F7F5F9] rounded-2xl p-4 flex items-center gap-4"
+              onClick={() => navigate(`/payment-methods/edit/${card.id}?type=${card.type}`)}
+              className="bg-[#F7F5F9] rounded-2xl p-6 flex items-center gap-4 w-full text-left hover:bg-[#F7F5F9]/90 transition-colors"
             >
               <div className="flex-shrink-0">{getCardLogo(card.type)}</div>
               <div className="flex-1">
@@ -87,20 +88,14 @@ const PaymentMethods = () => {
                   Expires {card.expiry}
                 </p>
               </div>
-              <button
-                onClick={() => navigate(`/payment-methods/edit/${card.id}`)}
-                className="text-[#323131]"
-                aria-label="More options"
-              >
-                <MoreVertical className="w-5 h-5" />
-              </button>
-            </div>
+              <MoreVertical className="w-5 h-5 text-[#323131]" />
+            </button>
           ))}
 
           {/* Add Payment Method Button */}
           <Button
             onClick={() => navigate("/payment-methods/add")}
-            className="w-full bg-[#FECE00] hover:bg-[#FECE00]/90 text-[#000000] font-heading text-[20px] py-6 rounded-2xl h-auto mt-6"
+            className="w-full bg-[#FECE00] hover:bg-[#FECE00]/90 text-[#000000] font-heading text-[20px] py-6 rounded-2xl h-auto mt-8"
           >
             Add Payment Method
           </Button>
