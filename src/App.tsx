@@ -19,6 +19,9 @@ import BoardingPass from "./pages/BoardingPass";
 import FlightStatus from "./pages/FlightStatus";
 import FlightStatusDetails from "./pages/FlightStatusDetails";
 import Notifications from "./pages/Notifications";
+import PaymentMethods from "./pages/PaymentMethods";
+import AddPaymentMethod from "./pages/AddPaymentMethod";
+import EditPaymentMethod from "./pages/EditPaymentMethod";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -46,6 +49,9 @@ const App = () => (
           <Route path="/flight-status" element={<FlightStatus />} />
           <Route path="/flight-status-details" element={<FlightStatusDetails />} />
           <Route path="/notifications" element={<Notifications />} />
+          <Route path="/payment-methods" element={<PaymentMethods />} />
+          <Route path="/payment-methods/add" element={<AddPaymentMethod />} />
+          <Route path="/payment-methods/edit/:id" element={<EditPaymentMethod />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
