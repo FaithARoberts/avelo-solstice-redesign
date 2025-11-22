@@ -12,6 +12,14 @@ const Book = () => {
   const [shopWithMiles, setShopWithMiles] = useState(true);
   const [excludeBasic, setExcludeBasic] = useState(false);
   const [lowestFares, setLowestFares] = useState(true);
+  const [origin, setOrigin] = useState({ code: "ATL", city: "Atlanta,GA" });
+  const [destination, setDestination] = useState({ code: "ALB", city: "Albany,Ny" });
+
+  const handleSwapDestinations = () => {
+    const temp = origin;
+    setOrigin(destination);
+    setDestination(temp);
+  };
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -59,13 +67,16 @@ const Book = () => {
           <div className="bg-avelo-card-light rounded-2xl p-4 space-y-3 mb-6">
             <div className="flex items-center gap-4">
               <div className="flex-1">
-                <div className="text-2xl font-heading font-semibold">ATL</div>
-                <div className="text-sm text-avelo-text-medium">Atlanta,GA</div>
+                <div className="text-2xl font-heading font-semibold">{origin.code}</div>
+                <div className="text-sm text-avelo-text-medium">{origin.city}</div>
               </div>
-              <ArrowLeftRight className="w-6 h-6 text-avelo-purple" />
+              <ArrowLeftRight 
+                className="w-6 h-6 text-avelo-purple cursor-pointer" 
+                onClick={handleSwapDestinations}
+              />
               <div className="flex-1 text-right">
-                <div className="text-2xl font-heading font-semibold">ALB</div>
-                <div className="text-sm text-avelo-text-medium">Albany,Ny</div>
+                <div className="text-2xl font-heading font-semibold">{destination.code}</div>
+                <div className="text-sm text-avelo-text-medium">{destination.city}</div>
               </div>
             </div>
             
