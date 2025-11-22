@@ -19,7 +19,7 @@ const Review = () => {
             <ArrowLeft className="w-6 h-6" />
           </button>
           <h1 className="text-lg font-heading font-semibold">Review and pay</h1>
-          <button className="text-sm font-body text-avelo-purple">New search</button>
+          <button onClick={() => navigate('/book')} className="text-sm font-body text-avelo-purple">New search</button>
         </div>
       </header>
       
