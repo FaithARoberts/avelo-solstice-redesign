@@ -70,8 +70,8 @@ const Book = () => {
                 <div className="text-2xl font-heading font-semibold">{origin.code}</div>
                 <div className="text-sm text-avelo-text-medium">{origin.city}</div>
               </div>
-              <ArrowLeftRight 
-                className="w-6 h-6 text-avelo-purple cursor-pointer" 
+               <ArrowLeftRight 
+                className="w-6 h-6 text-avelo-purple cursor-pointer hover:scale-110 active:scale-95 transition-transform" 
                 onClick={handleSwapDestinations}
               />
               <div className="flex-1 text-right">
@@ -126,7 +126,7 @@ const Book = () => {
           
           <Button 
             onClick={() => navigate("/flights")}
-            className="w-full bg-avelo-yellow hover:bg-avelo-yellow/90 text-black font-heading text-xl py-6 rounded-2xl h-auto"
+            className="w-full bg-avelo-yellow hover:bg-avelo-yellow/90 text-avelo-purple font-heading text-xl h-12 rounded-2xl"
           >
             Find Flight
           </Button>

@@ -15,7 +15,16 @@ All colors MUST be HSL.
     --avelo-card-light: 270 33% 97%;     /* #F7F5F9 */
     --avelo-text-dark: 0 0% 0%;          /* #000000 */
     --avelo-text-medium: 0 3% 20%;       /* #323131 */
+    --avelo-text-light: 0 3% 45%;        /* #716F6F - for labels and secondary text */
     --avelo-error: 0 100% 33%;           /* #A70101 */
+    
+    /* Typography scale utilities */
+    --text-h1: 40px;
+    --text-h2: 24px;
+    --text-h3: 20px;
+    --text-body: 16px;
+    --text-small: 13px;
+    --text-tiny: 10px;
     
     /* Semantic tokens mapped to Avelo design */
     --background: 0 0% 100%;
@@ -62,5 +71,21 @@ All colors MUST be HSL.
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
+  }
+}
+
+@layer utilities {
+  /* Button state utilities */
+  .btn-active-scale {
+    @apply active:scale-[0.98] transition-transform duration-150;
+  }
+  
+  .btn-hover-lift {
+    @apply hover:shadow-lg transition-shadow duration-200;
+  }
+  
+  /* Card tap states */
+  .card-tap {
+    @apply active:scale-[0.99] transition-transform duration-150;
   }
 }

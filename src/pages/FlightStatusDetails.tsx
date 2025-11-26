@@ -24,10 +24,10 @@ const FlightStatusDetails = () => {
                 <p className="text-base font-body text-avelo-text-dark">
                   12:00 PM
                 </p>
-                <p className="text-[13px] font-body text-avelo-text-light mt-2">
+                <p className="text-small font-body text-avelo-text-medium">
                   Terminal 2
                 </p>
-                <p className="text-[13px] font-body text-avelo-text-light">
+                <p className="text-small font-body text-avelo-text-medium">
                   Gate 14
                 </p>
               </div>
@@ -42,17 +42,17 @@ const FlightStatusDetails = () => {
                 <p className="text-base font-body text-avelo-text-dark">
                   3:00 PM
                 </p>
-                <p className="text-[13px] font-body text-avelo-text-light mt-2">
+                <p className="text-small font-body text-avelo-text-medium mt-2">
                   Terminal 1
                 </p>
-                <p className="text-[13px] font-body text-avelo-text-light">
+                <p className="text-small font-body text-avelo-text-medium">
                   Gate 8
                 </p>
               </div>
             </div>
             
             <div className="pt-4 border-t border-border">
-              <p className="text-[10px] font-body text-avelo-text-light leading-relaxed">
+              <p className="text-tiny font-body text-avelo-text-medium leading-relaxed">
                 Flight times shown are local to each airport. All times are subject to change. 
                 Please check with your airline for the most current information.
               </p>

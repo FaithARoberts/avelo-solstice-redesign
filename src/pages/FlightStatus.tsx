@@ -31,19 +31,19 @@ const FlightStatus = () => {
             // Search Form
             <form onSubmit={handleSubmit} className="space-y-7">
               <div className="space-y-2">
-                <Label htmlFor="flightNumber" className="text-[13px] font-body text-white">
+                <Label htmlFor="flightNumber" className="text-small font-body text-white font-medium">
                   Flight number
                 </Label>
                 <Input
                   id="flightNumber"
                   type="text"
                   placeholder="AV 123"
-                  className="h-11 bg-avelo-yellow border-none rounded-2xl text-base font-body text-avelo-text-dark focus-visible:ring-2 focus-visible:ring-avelo-purple placeholder:text-avelo-text-dark"
+                  className="h-11 bg-avelo-yellow border-none rounded-2xl text-base font-body text-avelo-text-dark focus-visible:ring-2 focus-visible:ring-avelo-purple placeholder:text-avelo-text-dark/60"
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="date" className="text-[13px] font-body text-white">
+                <Label htmlFor="date" className="text-small font-body text-white font-medium">
                   Date
                 </Label>
                 <Input
@@ -74,7 +74,7 @@ const FlightStatus = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-xl font-heading text-avelo-purple">ONT</p>
-                    <p className="text-[13px] font-body text-avelo-text-light">Ontario, CA</p>
+                    <p className="text-small font-body text-avelo-text-medium">Ontario, CA</p>
                     <p className="text-base font-body text-avelo-text-dark">12:00 PM</p>
                   </div>
                   
@@ -82,12 +82,12 @@ const FlightStatus = () => {
                   
                   <div className="text-right">
                     <p className="text-xl font-heading text-avelo-purple">DAL</p>
-                    <p className="text-[13px] font-body text-avelo-text-light">Dallas, TX</p>
+                    <p className="text-small font-body text-avelo-text-medium">Dallas, TX</p>
                     <p className="text-base font-body text-avelo-text-dark">3:00 PM</p>
                   </div>
                 </div>
                 
-                <p className="text-[13px] font-body text-avelo-text-light">
+                <p className="text-small font-body text-avelo-text-medium">
                   JAN 23, 2025 • Gate 14 • Terminal 2
                 </p>
               </div>

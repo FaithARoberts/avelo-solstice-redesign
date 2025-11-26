@@ -17,6 +17,14 @@ export default {
         heading: ['Signika', 'sans-serif'],
         body: ['Source Sans 3', 'sans-serif'],
       },
+      fontSize: {
+        'h1': ['40px', { lineHeight: '1.2', fontWeight: '600' }],
+        'h2': ['24px', { lineHeight: '1.3', fontWeight: '600' }],
+        'h3': ['20px', { lineHeight: '1.4', fontWeight: '600' }],
+        'body': ['16px', { lineHeight: '1.5' }],
+        'small': ['13px', { lineHeight: '1.5' }],
+        'tiny': ['10px', { lineHeight: '1.5' }],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -58,6 +66,7 @@ export default {
           "card-light": "hsl(var(--avelo-card-light))",
           "text-dark": "hsl(var(--avelo-text-dark))",
           "text-medium": "hsl(var(--avelo-text-medium))",
+          "text-light": "hsl(var(--avelo-text-light))",
           error: "hsl(var(--avelo-error))",
         },
       },

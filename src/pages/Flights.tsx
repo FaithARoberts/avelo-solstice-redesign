@@ -14,29 +14,29 @@ const Flights = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <header className="bg-background border-b border-border p-4">
+      <header className="bg-avelo-purple-dark border-b border-avelo-purple p-4">
         <div className="max-w-md mx-auto flex items-center justify-between">
-          <button onClick={() => navigate(-1)}>
-            <ArrowLeft className="w-6 h-6" />
+          <button onClick={() => navigate(-1)} className="hover:scale-110 transition-transform">
+            <ArrowLeft className="w-6 h-6 text-white" />
           </button>
-          <h1 className="text-xl font-heading font-semibold">ATL - ALB</h1>
-          <button className="text-base font-body text-avelo-purple">Sort</button>
+          <h1 className="text-xl font-heading font-semibold text-white">ATL - ALB</h1>
+          <button className="text-base font-body text-avelo-yellow hover:text-avelo-yellow/80">Sort</button>
         </div>
       </header>
       
-      <div className="bg-background border-b border-border overflow-x-auto">
+      <div className="bg-avelo-purple-dark border-b border-avelo-purple overflow-x-auto">
         <div className="max-w-md mx-auto flex gap-2 p-2">
           {["Sun,Oct 26", "Mon,Oct 27", "Tue, Oct 28", "Wed,Oct 29", "Thur,Oct 30", "Fri, Oc"].map((date, idx) => (
             <button
               key={date}
-              className={`flex-shrink-0 px-4 py-2 rounded-lg text-sm whitespace-nowrap ${
+              className={`flex-shrink-0 px-4 py-2 rounded-lg text-sm whitespace-nowrap transition-all active:scale-95 ${
                 idx === 2 
-                  ? "bg-avelo-purple text-white" 
-                  : "bg-muted text-avelo-text-dark"
+                  ? "bg-avelo-yellow text-avelo-purple font-semibold" 
+                  : "bg-white/10 text-white hover:bg-white/20"
               }`}
             >
               <div>{date}</div>
-              <div className="font-semibold" style={{ color: idx === 2 ? "#FECE00" : "inherit" }}>
+              <div className="font-semibold">
                 ${idx === 2 ? "1,300" : idx === 1 ? "1,500" : "1,345"}
               </div>
             </button>
@@ -56,7 +56,7 @@ const Flights = () => {
               <div 
                 key={idx}
                 onClick={() => navigate("/review")}
-                className="bg-avelo-card-light rounded-2xl p-5 cursor-pointer hover:bg-opacity-95 transition-all"
+                className="bg-avelo-card-light rounded-2xl p-5 cursor-pointer hover:bg-avelo-card-light/95 active:scale-[0.99] transition-all"
               >
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex-1">
@@ -86,10 +86,10 @@ const Flights = () => {
                   Operated by PSA Airlines as Avelo Connect
                 </div>
                 
-                <div className="flex gap-4 text-sm text-avelo-text-medium border-t border-border pt-2">
-                  <button className="hover:text-avelo-purple">Details</button>
+                <div className="flex gap-4 text-sm text-avelo-text-medium border-t border-border pt-3 mt-2">
+                  <button className="hover:text-avelo-purple transition-colors active:scale-95">Details</button>
                   <span>|</span>
-                  <button className="hover:text-avelo-purple">Seats</button>
+                  <button className="hover:text-avelo-purple transition-colors active:scale-95">Seats</button>
                 </div>
                 
                 <div className="text-xs text-avelo-text-medium mt-2 flex items-center">
