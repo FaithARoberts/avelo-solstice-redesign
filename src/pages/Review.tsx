@@ -13,13 +13,13 @@ const Review = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <header className="bg-background border-b border-border p-4">
+      <header className="bg-avelo-purple-dark border-b border-avelo-purple p-4">
         <div className="max-w-md mx-auto flex items-center justify-between">
-          <button onClick={() => navigate(-1)}>
-            <ArrowLeft className="w-6 h-6" />
+          <button onClick={() => navigate(-1)} className="hover:scale-110 transition-transform">
+            <ArrowLeft className="w-6 h-6 text-white" />
           </button>
-          <h1 className="text-lg font-heading font-semibold">Review and pay</h1>
-          <button onClick={() => navigate('/book')} className="text-sm font-body text-avelo-purple">New search</button>
+          <h1 className="text-lg font-heading font-semibold text-white">Review and pay</h1>
+          <button onClick={() => navigate('/book')} className="text-sm font-body text-avelo-yellow hover:text-avelo-yellow/80">New search</button>
         </div>
       </header>
       
@@ -96,16 +96,16 @@ const Review = () => {
             </div>
           </div>
           
-          <div className="bg-avelo-card-light rounded-2xl p-5 mb-4">
-            <div className="flex justify-between font-heading font-semibold text-lg">
+          <div className="bg-avelo-card-light rounded-2xl p-5 mb-6">
+            <div className="flex justify-between font-heading font-semibold text-xl">
               <span>Total amount due</span>
-              <span>$1,136.37</span>
+              <span className="text-avelo-purple">$1,136.37</span>
             </div>
           </div>
           
           <Collapsible open={isCostSummaryOpen} onOpenChange={setIsCostSummaryOpen}>
-            <div className="bg-avelo-card-light rounded-2xl p-5">
-              <CollapsibleTrigger className="w-full">
+            <div className="bg-avelo-card-light rounded-2xl p-5 mb-6">
+              <CollapsibleTrigger className="w-full hover:opacity-80 transition-opacity">
                 <div className="flex items-center justify-between">
                   <h3 className="text-xl font-heading font-semibold">Cost Summary</h3>
                   <ChevronDown 
@@ -156,14 +156,14 @@ const Review = () => {
             </div>
           </Collapsible>
           
-          <div className="relative rounded-2xl overflow-hidden mt-6 mb-6">
+          <div className="relative rounded-2xl overflow-hidden mb-6">
             <img 
               src={airplaneInterior} 
               alt="Airplane interior" 
               className="w-full h-48 object-cover"
             />
-            <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-              <h2 className="text-white font-heading text-2xl font-semibold text-center px-4">
+            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/60 via-black/30 to-black/20">
+              <h2 className="text-white font-heading text-2xl font-semibold text-center px-4 drop-shadow-lg">
                 Enjoy Convenient Air Travel with Us
               </h2>
             </div>

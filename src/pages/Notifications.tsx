@@ -35,15 +35,15 @@ const Notifications = () => {
               key={index}
               className="bg-white rounded-2xl p-[18px] border border-border space-y-2"
             >
-              <div className="flex justify-between items-start gap-2">
+              <div className="flex items-center justify-between">
                 <h3 className="text-base font-body font-semibold text-avelo-text-dark">
                   {notification.title}
                 </h3>
-                <span className="text-[13px] font-body text-avelo-text-light whitespace-nowrap">
+                <span className="text-small font-body text-avelo-text-medium whitespace-nowrap">
                   {notification.time}
                 </span>
               </div>
-              <p className="text-base font-body text-avelo-text-light">
+              <p className="text-base font-body text-avelo-text-medium">
                 {notification.message}
               </p>
             </div>

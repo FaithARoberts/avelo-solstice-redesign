@@ -25,26 +25,26 @@ const CheckIn = () => {
         <form onSubmit={handleSubmit} className="max-w-md mx-auto">
           <div className="bg-white rounded-2xl p-[18px] space-y-7 border-[4px] border-avelo-purple">
             <div className="space-y-2">
-              <Label htmlFor="confirmation" className="text-[13px] font-body text-avelo-text-light">
+              <Label htmlFor="confirmation" className="text-small font-body text-avelo-text-medium font-medium">
                 Confirmation Code
               </Label>
               <Input
                 id="confirmation"
                 type="text"
                 placeholder="ABC123"
-                className="h-11 bg-avelo-yellow border-none rounded-2xl text-base font-body focus-visible:ring-2 focus-visible:ring-avelo-purple focus-visible:border-avelo-purple placeholder:text-avelo-text-light"
+                className="h-11 bg-avelo-yellow border-none rounded-2xl text-base font-body text-avelo-text-dark placeholder:text-avelo-text-dark/60 focus-visible:ring-2 focus-visible:ring-avelo-purple"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="lastname" className="text-[13px] font-body text-avelo-text-light">
+              <Label htmlFor="lastname" className="text-small font-body text-avelo-text-medium font-medium">
                 Last Name
               </Label>
               <Input
                 id="lastname"
                 type="text"
                 placeholder="Smith"
-                className="h-11 bg-avelo-yellow border-none rounded-2xl text-base font-body focus-visible:ring-2 focus-visible:ring-avelo-purple focus-visible:border-avelo-purple placeholder:text-avelo-text-light"
+                className="h-11 bg-avelo-yellow border-none rounded-2xl text-base font-body text-avelo-text-dark placeholder:text-avelo-text-dark/60 focus-visible:ring-2 focus-visible:ring-avelo-purple"
               />
             </div>
 
@@ -55,7 +55,7 @@ const CheckIn = () => {
               Continue
             </Button>
 
-            <p className="text-[10px] font-body text-avelo-text-light text-center">
+            <p className="text-tiny font-body text-avelo-text-medium text-center leading-relaxed">
               CONFIRMATION CODE CAN BE FOUND IN YOUR EMAIL
             </p>
           </div>
