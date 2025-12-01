@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, MoreVertical } from "lucide-react";
 import BottomNav from "@/components/BottomNav";
@@ -12,14 +12,21 @@ interface PaymentCard {
   expiry: string;
 }
 
+const INITIAL_CARDS: PaymentCard[] = [
+  { id: "1", type: "mastercard", last4: "9999", expiry: "10/28" },
+  { id: "2", type: "visa", last4: "8888", expiry: "12/26" },
+  { id: "3", type: "amex", last4: "7777", expiry: "01/25" },
+  { id: "4", type: "discover", last4: "5555", expiry: "08/30" },
+];
+
 const PaymentMethods = () => {
   const navigate = useNavigate();
-  const [cards, setCards] = useState<PaymentCard[]>([
-    { id: "1", type: "mastercard", last4: "9999", expiry: "10/28" },
-    { id: "2", type: "visa", last4: "8888", expiry: "12/26" },
-    { id: "3", type: "amex", last4: "7777", expiry: "01/25" },
-    { id: "4", type: "discover", last4: "5555", expiry: "08/30" },
-  ]);
+  const [cards, setCards] = useState<PaymentCard[]>(INITIAL_CARDS);
+
+  // Reset cards on component mount to restore deleted cards on refresh
+  useEffect(() => {
+    setCards(INITIAL_CARDS);
+  }, []);
 
   const getCardLogo = (type: string) => {
     const logos = {
@@ -51,33 +58,36 @@ const PaymentMethods = () => {
   return (
     <div className="min-h-screen bg-[#310047] flex flex-col">
       {/* Header */}
-      <div className="bg-[#580081] pt-12 pb-6 px-4">
-        <div className="max-w-md mx-auto flex items-center justify-between mb-6">
+      <div className="bg-white border-b border-border py-4">
+        <div className="max-w-md mx-auto px-4 flex items-center justify-between">
           <button
             onClick={() => navigate("/more")}
-            className="text-avelo-yellow"
+            className="text-avelo-purple"
             aria-label="Go back"
           >
             <ArrowLeft className="w-6 h-6" />
           </button>
-          <div className="h-12 relative z-10">
+          <div className="h-12">
             <AveloLogo showTagline={false} />
           </div>
           <div className="w-6" />
         </div>
-        <h1 className="text-2xl font-heading font-semibold text-white text-center">
+      </div>
+
+      <div className="bg-avelo-purple-dark pt-6 pb-4 px-4">
+        <h1 className="text-2xl font-heading font-semibold text-white text-center max-w-md mx-auto">
           Payment Methods
         </h1>
       </div>
 
       {/* Cards List */}
-      <main className="flex-1 pb-32 px-4 pt-8">
+      <main className="flex-1 pb-32 px-4 pt-8 bg-avelo-purple-dark">
         <div className="max-w-md mx-auto space-y-6">
           {cards.map((card) => (
             <button
               key={card.id}
-              onClick={() => navigate(`/payment-methods/edit/${card.id}?type=${card.type}`)}
-              className="bg-[#F7F5F9] rounded-2xl p-6 flex items-center gap-4 w-full text-left hover:bg-[#F7F5F9]/90 transition-colors"
+              onClick={() => navigate(`/payment-methods/edit/${card.id}?type=${card.type}&last4=${card.last4}&expiry=${card.expiry}`)}
+              className="bg-[#F7F5F9] rounded-2xl p-6 flex items-center gap-4 w-full text-left hover:bg-[#F7F5F9]/90 active:scale-[0.98] transition-all"
             >
               <div className="flex-shrink-0">{getCardLogo(card.type)}</div>
               <div className="flex-1">

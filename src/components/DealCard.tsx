@@ -22,7 +22,7 @@ const DealCard = ({
   const navigate = useNavigate();
 
   const handleBookNow = () => {
-    navigate("/book");
+    navigate("/flights");
   };
 
   return (

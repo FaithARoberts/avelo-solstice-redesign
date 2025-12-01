@@ -25,11 +25,11 @@ const AddPaymentMethod = () => {
   return (
     <div className="min-h-screen bg-[#310047] flex flex-col">
       {/* Header */}
-      <div className="bg-[#580081] pt-12 pb-6 px-4">
-        <div className="max-w-md mx-auto flex items-center justify-between mb-6">
+      <div className="bg-white border-b border-border py-4">
+        <div className="max-w-md mx-auto px-4 flex items-center justify-between">
           <button
             onClick={() => navigate("/payment-methods")}
-            className="text-avelo-yellow"
+            className="text-avelo-purple"
             aria-label="Go back"
           >
             <ArrowLeft className="w-6 h-6" />
@@ -39,13 +39,16 @@ const AddPaymentMethod = () => {
           </div>
           <div className="w-6" />
         </div>
-        <h1 className="text-2xl font-heading font-semibold text-white text-center">
+      </div>
+
+      <div className="bg-avelo-purple-dark pt-6 pb-4 px-4">
+        <h1 className="text-2xl font-heading font-semibold text-white text-center max-w-md mx-auto">
           Add Your Card
         </h1>
       </div>
 
       {/* Form */}
-      <main className="flex-1 pb-32 px-4 pt-8">
+      <main className="flex-1 pb-32 px-4 pt-8 bg-avelo-purple-dark">
         <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-8">
           {/* Name */}
           <div>
