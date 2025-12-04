@@ -107,6 +107,16 @@ const Login = () => {
             Continue with Google
           </Button>
 
+          <div className="text-center">
+            <button
+              type="button"
+              onClick={() => navigate("/forgot-password")}
+              className="text-sm text-avelo-purple underline hover:text-avelo-purple/80 font-body"
+            >
+              Forgot Password?
+            </button>
+          </div>
+
           <div className="text-center text-[13px] text-avelo-text-medium space-x-2 font-body">
             <span>New to Avelo?</span>
             <button

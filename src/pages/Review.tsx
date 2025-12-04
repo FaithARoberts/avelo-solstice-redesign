@@ -140,6 +140,25 @@ const Review = () => {
             </div>
           </div>
 
+          {currentBooking?.selectedSeat && (
+            <div className="bg-avelo-card-light rounded-2xl p-5 mb-6">
+              <div className="flex justify-between items-center">
+                <div>
+                  <p className="text-sm text-avelo-text-medium font-body">Selected Seat</p>
+                  <p className="text-xl font-heading font-semibold text-avelo-text-dark">
+                    {currentBooking.selectedSeat}
+                  </p>
+                </div>
+                <button
+                  onClick={() => navigate("/seat-selection")}
+                  className="text-sm text-avelo-purple underline font-body"
+                >
+                  Change
+                </button>
+              </div>
+            </div>
+          )}
+
           <div className="bg-avelo-card-light rounded-2xl p-5 mb-6">
             <div className="flex justify-between font-heading font-semibold text-xl">
               <span>Total amount due</span>

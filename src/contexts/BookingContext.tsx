@@ -16,18 +16,24 @@ export interface Booking {
     stops: string;
     price: number;
   };
+  selectedSeat?: string;
   totalPrice: number;
   confirmationCode: string;
-  status: "booked" | "confirmed" | "completed" | "cancelled";
+  status: "booked" | "confirmed" | "checked-in" | "completed" | "cancelled";
   createdAt: string;
+}
+
+interface CurrentBooking extends Partial<Booking> {
+  selectedSeat?: string;
 }
 
 interface BookingContextType {
   bookings: Booking[];
-  currentBooking: Partial<Booking> | null;
-  setCurrentBooking: (booking: Partial<Booking> | null) => void;
+  currentBooking: CurrentBooking | null;
+  setCurrentBooking: (booking: CurrentBooking | null) => void;
   saveBooking: (userId: string) => Booking | null;
   getUserBookings: (userId: string) => Booking[];
+  updateBookingStatus: (bookingId: string, status: Booking["status"]) => void;
 }
 
 const BookingContext = createContext<BookingContextType | undefined>(undefined);
@@ -45,7 +51,7 @@ const generateConfirmationCode = () => {
 
 export const BookingProvider = ({ children }: { children: ReactNode }) => {
   const [bookings, setBookings] = useState<Booking[]>([]);
-  const [currentBooking, setCurrentBooking] = useState<Partial<Booking> | null>(null);
+  const [currentBooking, setCurrentBooking] = useState<CurrentBooking | null>(null);
 
   useEffect(() => {
     const stored = localStorage.getItem(BOOKINGS_STORAGE_KEY);
@@ -72,6 +78,7 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
       passengers: currentBooking.passengers || 1,
       tripType: currentBooking.tripType || "roundTrip",
       selectedFlight: currentBooking.selectedFlight,
+      selectedSeat: currentBooking.selectedSeat,
       totalPrice: currentBooking.selectedFlight.price,
       confirmationCode: generateConfirmationCode(),
       status: "booked",
@@ -89,6 +96,13 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
     return bookings.filter((b) => b.userId === userId);
   };
 
+  const updateBookingStatus = (bookingId: string, status: Booking["status"]) => {
+    const updatedBookings = bookings.map((b) =>
+      b.id === bookingId ? { ...b, status } : b
+    );
+    saveBookingsToStorage(updatedBookings);
+  };
+
   return (
     <BookingContext.Provider
       value={{
@@ -97,6 +111,7 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
         setCurrentBooking,
         saveBooking,
         getUserBookings,
+        updateBookingStatus,
       }}
     >
       {children}

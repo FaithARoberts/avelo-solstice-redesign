@@ -4,9 +4,17 @@ import PageHeader from "@/components/PageHeader";
 import BottomNav from "@/components/BottomNav";
 import { Button } from "@/components/ui/button";
 import miamiHero from "@/assets/miami-hero.jpg";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Home = () => {
   const navigate = useNavigate();
+  const { user, isAuthenticated } = useAuth();
+
+  const generateMemberNumber = (id: string) => {
+    // Generate a consistent member number from user ID
+    const hash = id.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    return `${hash}${hash * 2}${hash * 3}`.slice(0, 11);
+  };
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -25,22 +33,41 @@ const Home = () => {
             Find Flight
           </Button>
           
-          <div 
-            className="bg-avelo-card-light rounded-2xl p-6 mb-6 cursor-pointer hover:bg-opacity-95 transition-all"
-            onClick={() => navigate("/account")}
-          >
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-xl font-heading font-semibold text-avelo-text-dark mb-1">
-                  Welcome back, Junior
-                </h2>
-                <p className="text-sm text-avelo-text-medium">
-                  Avelo member #33477377342
-                </p>
+          {isAuthenticated && user ? (
+            <div 
+              className="bg-avelo-card-light rounded-2xl p-6 mb-6 cursor-pointer hover:bg-opacity-95 transition-all"
+              onClick={() => navigate("/account")}
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-xl font-heading font-semibold text-avelo-text-dark mb-1">
+                    Welcome back, {user.name.split(" ")[0]}
+                  </h2>
+                  <p className="text-sm text-avelo-text-medium">
+                    Avelo member #{generateMemberNumber(user.id)}
+                  </p>
+                </div>
+                <ChevronRight className="w-6 h-6 text-avelo-text-medium" />
               </div>
-              <ChevronRight className="w-6 h-6 text-avelo-text-medium" />
             </div>
-          </div>
+          ) : (
+            <div 
+              className="bg-avelo-card-light rounded-2xl p-6 mb-6 cursor-pointer hover:bg-opacity-95 transition-all"
+              onClick={() => navigate("/login")}
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-xl font-heading font-semibold text-avelo-text-dark mb-1">
+                    Sign in to your account
+                  </h2>
+                  <p className="text-sm text-avelo-text-medium">
+                    Access your trips and rewards
+                  </p>
+                </div>
+                <ChevronRight className="w-6 h-6 text-avelo-text-medium" />
+              </div>
+            </div>
+          )}
           
           <div className="relative rounded-2xl overflow-hidden">
             <img 
