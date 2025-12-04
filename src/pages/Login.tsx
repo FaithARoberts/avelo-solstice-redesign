@@ -3,22 +3,61 @@ import { useNavigate } from "react-router-dom";
 import AveloLogo from "@/components/AveloLogo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from "@/hooks/use-toast";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
+  const { toast } = useToast();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validate = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (!email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = "Invalid email format";
+    }
+
+    if (!password) {
+      newErrors.password = "Password is required";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate("/");
+
+    if (!validate()) return;
+
+    const result = login(email, password);
+
+    if (result.success) {
+      toast({
+        title: "Welcome back!",
+        description: "You have successfully logged in",
+      });
+      navigate("/");
+    } else {
+      toast({
+        title: "Login failed",
+        description: result.error,
+        variant: "destructive",
+      });
+    }
   };
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-background border-[4px] border-avelo-purple rounded-3xl p-[18px] space-y-6">
         <AveloLogo />
-        
+
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
             <label htmlFor="email" className="block text-[13px] font-body text-avelo-text-medium mb-1">
@@ -30,10 +69,11 @@ const Login = () => {
               placeholder="Enter Email Here"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-2xl border-avelo-text-medium/30 h-11 text-base font-body"
+              className={`w-full rounded-2xl border-avelo-text-medium/30 h-11 text-base font-body ${errors.email ? "border-avelo-error" : ""}`}
             />
+            {errors.email && <p className="text-xs text-avelo-error mt-1">{errors.email}</p>}
           </div>
-          
+
           <div>
             <label htmlFor="password" className="block text-[13px] font-body text-avelo-text-medium mb-1">
               Password
@@ -44,14 +84,15 @@ const Login = () => {
               placeholder="Enter Password Here"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-2xl border-avelo-text-medium/30 h-11 text-base font-body"
+              className={`w-full rounded-2xl border-avelo-text-medium/30 h-11 text-base font-body ${errors.password ? "border-avelo-error" : ""}`}
             />
+            {errors.password && <p className="text-xs text-avelo-error mt-1">{errors.password}</p>}
           </div>
-          
+
           <div className="text-center py-2">
             <span className="text-sm text-avelo-text-medium">or</span>
           </div>
-          
+
           <Button
             type="button"
             variant="outline"
@@ -65,7 +106,7 @@ const Login = () => {
             </svg>
             Continue with Google
           </Button>
-          
+
           <div className="text-center text-[13px] text-avelo-text-medium space-x-2 font-body">
             <span>New to Avelo?</span>
             <button
@@ -78,13 +119,14 @@ const Login = () => {
             <span>|</span>
             <button
               type="button"
+              onClick={() => navigate("/")}
               className="text-avelo-purple underline hover:text-avelo-purple/80"
             >
               Continue as Guest
             </button>
           </div>
-          
-          <Button 
+
+          <Button
             type="submit"
             className="w-full bg-avelo-purple hover:bg-avelo-purple/90 text-white font-heading text-[20px] py-3 rounded-2xl h-auto"
           >
