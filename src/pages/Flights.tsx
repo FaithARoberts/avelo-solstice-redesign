@@ -1,10 +1,12 @@
+import { useState, useMemo } from "react";
 import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { format, addDays } from "date-fns";
+import { format, addDays, parseISO } from "date-fns";
 import BottomNav from "@/components/BottomNav";
 import { useBooking } from "@/contexts/BookingContext";
 
-const generateFlights = (origin: string, destination: string) => {
+const generateFlights = (origin: string, destination: string, dateIndex: number) => {
+  // Use dateIndex as seed for consistent but different prices per date
   const basePrices = [1117, 1217, 1319, 1450, 1089];
   const times = ["5:24PM", "3:28AM", "8:15AM", "11:45AM", "2:30PM"];
   const durations = ["4h 33m", "5h 17m", "3h 45m", "6h 12m", "4h 05m"];
@@ -15,13 +17,16 @@ const generateFlights = (origin: string, destination: string) => {
     const durationHours = parseInt(durations[idx].split("h")[0]);
     const arrivalHour = (hours + durationHours) % 12 || 12;
     const arrivalPeriod = (hours + durationHours) >= 12 ? "PM" : "AM";
+    
+    // Different price variation based on date
+    const priceVariation = (dateIndex * 47 + idx * 23) % 200;
 
     return {
       time,
-      arrivalTime: `${arrivalHour}:${Math.floor(Math.random() * 60).toString().padStart(2, "0")}${arrivalPeriod}`,
+      arrivalTime: `${arrivalHour}:${(30 + idx * 7) % 60}${arrivalPeriod}`,
       duration: durations[idx],
       stops: stops[idx],
-      price: basePrices[idx] + Math.floor(Math.random() * 100),
+      price: basePrices[idx] + priceVariation,
     };
   });
 };
@@ -29,28 +34,47 @@ const generateFlights = (origin: string, destination: string) => {
 const Flights = () => {
   const navigate = useNavigate();
   const { currentBooking, setCurrentBooking } = useBooking();
+  const [selectedDateIndex, setSelectedDateIndex] = useState(2); // Default to 3rd date
 
   const origin = currentBooking?.origin || { code: "ATL", city: "Atlanta, GA" };
   const destination = currentBooking?.destination || { code: "ALB", city: "Albany, NY" };
-  const departureDate = currentBooking?.departureDate || "Oct 28, 2025";
 
-  const flights = generateFlights(origin.code, destination.code);
+  // Generate dates around the booking date
+  const baseDate = currentBooking?.departureDate 
+    ? new Date(currentBooking.departureDate)
+    : new Date(2025, 9, 28);
+  
+  const dates = useMemo(() => Array.from({ length: 6 }, (_, i) => {
+    const offset = i - 2; // Center around selected date
+    const date = addDays(baseDate, offset);
+    // Consistent pricing per date
+    const basePrice = 1200 + (date.getDate() * 17 + date.getMonth() * 31) % 400;
+    return { date, price: basePrice };
+  }), [baseDate]);
 
-  const baseDate = new Date(2025, 9, 26);
-  const dates = Array.from({ length: 6 }, (_, i) => ({
-    date: addDays(baseDate, i),
-    price: 1300 + Math.floor(Math.random() * 300),
-  }));
+  const flights = useMemo(() => 
+    generateFlights(origin.code, destination.code, selectedDateIndex),
+    [origin.code, destination.code, selectedDateIndex]
+  );
+
+  const handleDateSelect = (index: number) => {
+    setSelectedDateIndex(index);
+    setCurrentBooking({
+      ...currentBooking,
+      departureDate: format(dates[index].date, "yyyy-MM-dd"),
+    });
+  };
 
   const handleSelectFlight = (flight: typeof flights[0]) => {
     setCurrentBooking({
       ...currentBooking,
+      departureDate: format(dates[selectedDateIndex].date, "yyyy-MM-dd"),
       selectedFlight: {
         ...flight,
         price: flight.price,
       },
     });
-    navigate("/review");
+    navigate("/seat-selection");
   };
 
   return (
@@ -74,8 +98,9 @@ const Flights = () => {
           {dates.map((item, idx) => (
             <button
               key={idx}
+              onClick={() => handleDateSelect(idx)}
               className={`flex-shrink-0 px-4 py-2 rounded-lg text-sm whitespace-nowrap transition-all active:scale-95 ${
-                idx === 2
+                idx === selectedDateIndex
                   ? "bg-avelo-yellow text-avelo-purple font-semibold"
                   : "bg-white/10 text-white hover:bg-white/20"
               }`}

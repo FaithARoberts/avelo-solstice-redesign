@@ -25,6 +25,10 @@ import Notifications from "./pages/Notifications";
 import PaymentMethods from "./pages/PaymentMethods";
 import AddPaymentMethod from "./pages/AddPaymentMethod";
 import EditPaymentMethod from "./pages/EditPaymentMethod";
+import ContactUs from "./pages/ContactUs";
+import Terms from "./pages/Terms";
+import ForgotPassword from "./pages/ForgotPassword";
+import SeatSelection from "./pages/SeatSelection";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -41,10 +45,12 @@ const App = () => (
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/account" element={<Account />} />
               <Route path="/more" element={<More />} />
               <Route path="/book" element={<Book />} />
               <Route path="/flights" element={<Flights />} />
+              <Route path="/seat-selection" element={<SeatSelection />} />
               <Route path="/review" element={<Review />} />
               <Route path="/booking-confirmation" element={<BookingConfirmation />} />
               <Route path="/deals" element={<Deals />} />
@@ -58,6 +64,8 @@ const App = () => (
               <Route path="/payment-methods" element={<PaymentMethods />} />
               <Route path="/payment-methods/add" element={<AddPaymentMethod />} />
               <Route path="/payment-methods/edit/:id" element={<EditPaymentMethod />} />
+              <Route path="/contact" element={<ContactUs />} />
+              <Route path="/terms" element={<Terms />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
