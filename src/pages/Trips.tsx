@@ -21,7 +21,11 @@ const Trips = () => {
 
   const bookings = isAuthenticated && user ? getUserBookings(user.id) : [];
   const upcomingBookings = bookings.filter(
-    (b) => b.status === "booked" || b.status === "confirmed"
+    (b) => 
+      (b.status === "booked" || b.status === "confirmed") &&
+      b.origin?.code && 
+      b.destination?.code &&
+      b.selectedFlight
   );
 
   return (
