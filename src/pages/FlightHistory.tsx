@@ -13,15 +13,17 @@ const FlightHistory = () => {
 
   const bookings = isAuthenticated && user ? getUserBookings(user.id) : [];
 
-  // Convert bookings to FlightCard format
-  const flights = bookings.map((booking) => ({
-    origin: booking.origin.code,
-    destination: booking.destination.code,
-    date: booking.departureDate.toUpperCase(),
-    time: booking.selectedFlight.time,
-    confirmationCode: booking.confirmationCode,
-    status: booking.status as "confirmed" | "booked",
-  }));
+  // Filter out invalid bookings and convert to FlightCard format
+  const flights = bookings
+    .filter((b) => b.origin?.code && b.destination?.code && b.selectedFlight)
+    .map((booking) => ({
+      origin: booking.origin.code,
+      destination: booking.destination.code,
+      date: booking.departureDate.toUpperCase(),
+      time: booking.selectedFlight.time,
+      confirmationCode: booking.confirmationCode,
+      status: booking.status as "confirmed" | "booked",
+    }));
 
   return (
     <div className="min-h-screen bg-avelo-purple-dark flex flex-col">
