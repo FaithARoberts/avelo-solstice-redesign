@@ -13,6 +13,8 @@ const CitySearchInput = ({ value, onChange, placeholder = "Search city", classNa
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [results, setResults] = useState<Airport[]>([]);
+  const [dropdownTop, setDropdownTop] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -21,8 +23,8 @@ const CitySearchInput = ({ value, onChange, placeholder = "Search city", classNa
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(e.target as Node) &&
-        inputRef.current &&
-        !inputRef.current.contains(e.target as Node)
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
       ) {
         setIsOpen(false);
       }
@@ -36,19 +38,28 @@ const CitySearchInput = ({ value, onChange, placeholder = "Search city", classNa
     setResults(searchAirports(search));
   }, [search]);
 
+  useEffect(() => {
+    if (isOpen && containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      setDropdownTop(rect.bottom + 8);
+    }
+  }, [isOpen]);
+
   const handleSelect = (airport: Airport) => {
     onChange({ code: airport.code, city: `${airport.city}, ${airport.state}` });
     setSearch("");
     setIsOpen(false);
   };
 
+  const handleOpen = () => {
+    setIsOpen(true);
+    setTimeout(() => inputRef.current?.focus(), 10);
+  };
+
   return (
-    <div className={cn("relative", className)}>
+    <div ref={containerRef} className={cn("relative", className)}>
       <div
-        onClick={() => {
-          setIsOpen(true);
-          inputRef.current?.focus();
-        }}
+        onClick={handleOpen}
         className="cursor-pointer"
       >
         <div className="text-2xl font-heading font-semibold">{value.code}</div>
@@ -58,7 +69,8 @@ const CitySearchInput = ({ value, onChange, placeholder = "Search city", classNa
       {isOpen && (
         <div
           ref={dropdownRef}
-          className="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl shadow-lg border border-border z-50 overflow-hidden"
+          className="fixed left-4 right-4 bg-white rounded-2xl shadow-lg border border-border z-50 overflow-hidden sm:absolute sm:top-full sm:left-0 sm:right-auto sm:w-72 sm:mt-2"
+          style={{ top: window.innerWidth < 640 ? dropdownTop : undefined }}
         >
           <input
             ref={inputRef}
@@ -66,8 +78,7 @@ const CitySearchInput = ({ value, onChange, placeholder = "Search city", classNa
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder={placeholder}
-            className="w-full px-4 py-3 border-b border-border text-base font-body focus:outline-none"
-            autoFocus
+            className="w-full px-4 py-3 border-b border-border text-base font-body focus:outline-none text-black"
           />
           <div className="max-h-64 overflow-y-auto">
             {results.map((airport) => (
