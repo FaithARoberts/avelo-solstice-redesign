@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { format, parseISO } from "date-fns";
+import { format, parseISO, isValid } from "date-fns";
 import BottomNav from "@/components/BottomNav";
 import { useBooking } from "@/contexts/BookingContext";
 
@@ -41,21 +41,25 @@ const Flights = () => {
 
   // Only show dates the user selected (departure and optional return)
   const dates = useMemo(() => {
-    const result = [];
+    const result: { date: Date; price: number; label: string }[] = [];
     
     if (currentBooking?.departureDate) {
       const depDate = parseISO(currentBooking.departureDate);
-      const basePrice = 1200 + (depDate.getDate() * 17 + depDate.getMonth() * 31) % 400;
-      result.push({ date: depDate, price: basePrice, label: "Departure" });
+      if (isValid(depDate)) {
+        const basePrice = 1200 + (depDate.getDate() * 17 + depDate.getMonth() * 31) % 400;
+        result.push({ date: depDate, price: basePrice, label: "Departure" });
+      }
     }
     
     if (currentBooking?.returnDate && currentBooking.tripType === "roundTrip") {
       const retDate = parseISO(currentBooking.returnDate);
-      const basePrice = 1200 + (retDate.getDate() * 17 + retDate.getMonth() * 31) % 400;
-      result.push({ date: retDate, price: basePrice, label: "Return" });
+      if (isValid(retDate)) {
+        const basePrice = 1200 + (retDate.getDate() * 17 + retDate.getMonth() * 31) % 400;
+        result.push({ date: retDate, price: basePrice, label: "Return" });
+      }
     }
     
-    // Fallback if no dates set
+    // Fallback if no valid dates
     if (result.length === 0) {
       const fallbackDate = new Date();
       result.push({ date: fallbackDate, price: 1200, label: "Departure" });
