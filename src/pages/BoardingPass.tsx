@@ -79,7 +79,7 @@ const BoardingPass = () => {
                 <p className="text-xl font-heading">{selectedSeat}</p>
                 <button
                   onClick={() => setIsSeatSheetOpen(true)}
-                  className="text-[11px] text-avelo-yellow underline mt-1 hover:text-avelo-yellow/80 transition-colors"
+                  className="text-xs bg-avelo-yellow text-avelo-purple px-2 py-1 rounded-full mt-2 font-body font-semibold hover:bg-avelo-yellow/80 transition-colors"
                 >
                   Change
                 </button>
