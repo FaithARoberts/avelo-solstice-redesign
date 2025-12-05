@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import PageHeader from "@/components/PageHeader";
 import BottomNav from "@/components/BottomNav";
@@ -8,11 +9,21 @@ import { format } from "date-fns";
 import { useAuth } from "@/contexts/AuthContext";
 import { Booking } from "@/contexts/BookingContext";
 import { toast } from "sonner";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
+import SeatMap from "@/components/SeatMap";
 
 const BoardingPass = () => {
   const location = useLocation();
   const { user } = useAuth();
   const booking = location.state?.booking as Booking | undefined;
+  
+  const [selectedSeat, setSelectedSeat] = useState(booking?.selectedSeat || "21F");
+  const [isSeatSheetOpen, setIsSeatSheetOpen] = useState(false);
 
   // Use booking data or fallback to defaults
   const passengerName = user?.name || "John Smith";
@@ -21,7 +32,6 @@ const BoardingPass = () => {
   const flightDate = booking?.departureDate 
     ? format(new Date(booking.departureDate), "MMM dd, yyyy")
     : "JAN 23, 2025";
-  const seat = booking?.selectedSeat || "21F";
   const gate = Math.floor(Math.random() * 30) + 1;
   const confirmationCode = booking?.confirmationCode || "ABC123";
   const boardingTime = booking?.selectedFlight?.time 
@@ -31,7 +41,13 @@ const BoardingPass = () => {
       })
     : "11:30 AM";
 
-  const qrValue = `${confirmationCode}-${origin}-${destination}-${booking?.departureDate || "20250123"}`;
+  const qrValue = `${confirmationCode}-${origin}-${destination}-${booking?.departureDate || "20250123"}-${selectedSeat}`;
+
+  const handleSeatChange = (seat: string) => {
+    setSelectedSeat(seat);
+    setIsSeatSheetOpen(false);
+    toast.success(`Seat changed to ${seat}`);
+  };
 
   return (
     <div className="min-h-screen bg-avelo-purple-dark flex flex-col">
@@ -60,7 +76,13 @@ const BoardingPass = () => {
             <div className="grid grid-cols-3 gap-4 py-4">
               <div className="text-center">
                 <p className="text-[13px] opacity-80">Seat</p>
-                <p className="text-xl font-heading">{seat}</p>
+                <p className="text-xl font-heading">{selectedSeat}</p>
+                <button
+                  onClick={() => setIsSeatSheetOpen(true)}
+                  className="text-[11px] text-avelo-yellow underline mt-1 hover:text-avelo-yellow/80 transition-colors"
+                >
+                  Change
+                </button>
               </div>
               <div className="text-center">
                 <p className="text-[13px] opacity-80">Gate</p>
@@ -97,6 +119,38 @@ const BoardingPass = () => {
           </Button>
         </div>
       </main>
+      
+      {/* Seat Selection Sheet */}
+      <Sheet open={isSeatSheetOpen} onOpenChange={setIsSeatSheetOpen}>
+        <SheetContent side="bottom" className="h-[85vh] bg-avelo-purple-dark border-t border-avelo-purple">
+          <SheetHeader className="mb-4">
+            <SheetTitle className="text-white font-heading text-xl">Change Seat</SheetTitle>
+          </SheetHeader>
+          
+          {/* Legend */}
+          <div className="flex justify-center gap-4 mb-4 flex-wrap">
+            <div className="flex items-center gap-2">
+              <div className="w-5 h-5 bg-avelo-yellow rounded" />
+              <span className="text-xs text-white font-body">Preferred +$45</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-5 h-5 bg-avelo-card-light rounded" />
+              <span className="text-xs text-white font-body">Standard</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-5 h-5 bg-avelo-text-medium rounded" />
+              <span className="text-xs text-white font-body">Taken</span>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-2xl p-4 max-h-[60vh] overflow-y-auto">
+            <SeatMap
+              selectedSeat={selectedSeat}
+              onSeatSelect={handleSeatChange}
+            />
+          </div>
+        </SheetContent>
+      </Sheet>
       
       <BottomNav />
     </div>
