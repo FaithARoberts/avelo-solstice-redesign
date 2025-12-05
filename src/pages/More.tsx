@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import PageHeader from "@/components/PageHeader";
 import BottomNav from "@/components/BottomNav";
 import { Button } from "@/components/ui/button";
-
+import { useAuth } from "@/contexts/AuthContext";
 const menuItems = [
   { label: "Account Details", path: "/account" },
   { label: "Notification Settings", path: "/notifications" },
@@ -14,6 +14,12 @@ const menuItems = [
 
 const More = () => {
   const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  const handleSignOut = () => {
+    logout();
+    navigate("/login");
+  };
 
   return (
     <div className="min-h-screen bg-avelo-purple-dark flex flex-col">
@@ -43,7 +49,7 @@ const More = () => {
         
         <div className="max-w-md mx-auto mt-8">
           <Button
-            onClick={() => navigate("/login")}
+            onClick={handleSignOut}
             className="w-full bg-avelo-yellow hover:bg-avelo-yellow/90 text-avelo-purple font-heading text-xl h-12 rounded-2xl"
           >
             Sign Out
