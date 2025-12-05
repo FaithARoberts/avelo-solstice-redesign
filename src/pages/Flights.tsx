@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { format, parseISO, isValid } from "date-fns";
+import { format, addDays, parseISO } from "date-fns";
 import BottomNav from "@/components/BottomNav";
 import { useBooking } from "@/contexts/BookingContext";
 
@@ -34,39 +34,23 @@ const generateFlights = (origin: string, destination: string, dateIndex: number)
 const Flights = () => {
   const navigate = useNavigate();
   const { currentBooking, setCurrentBooking } = useBooking();
-  const [selectedDateIndex, setSelectedDateIndex] = useState(0); // Default to first date (departure)
+  const [selectedDateIndex, setSelectedDateIndex] = useState(2); // Default to 3rd date
 
   const origin = currentBooking?.origin || { code: "ATL", city: "Atlanta, GA" };
   const destination = currentBooking?.destination || { code: "ALB", city: "Albany, NY" };
 
-  // Only show dates the user selected (departure and optional return)
-  const dates = useMemo(() => {
-    const result: { date: Date; price: number; label: string }[] = [];
-    
-    if (currentBooking?.departureDate) {
-      const depDate = parseISO(currentBooking.departureDate);
-      if (isValid(depDate)) {
-        const basePrice = 1200 + (depDate.getDate() * 17 + depDate.getMonth() * 31) % 400;
-        result.push({ date: depDate, price: basePrice, label: "Departure" });
-      }
-    }
-    
-    if (currentBooking?.returnDate && currentBooking.tripType === "roundTrip") {
-      const retDate = parseISO(currentBooking.returnDate);
-      if (isValid(retDate)) {
-        const basePrice = 1200 + (retDate.getDate() * 17 + retDate.getMonth() * 31) % 400;
-        result.push({ date: retDate, price: basePrice, label: "Return" });
-      }
-    }
-    
-    // Fallback if no valid dates
-    if (result.length === 0) {
-      const fallbackDate = new Date();
-      result.push({ date: fallbackDate, price: 1200, label: "Departure" });
-    }
-    
-    return result;
-  }, [currentBooking?.departureDate, currentBooking?.returnDate, currentBooking?.tripType]);
+  // Generate dates around the booking date
+  const baseDate = currentBooking?.departureDate 
+    ? new Date(currentBooking.departureDate)
+    : new Date(2025, 9, 28);
+  
+  const dates = useMemo(() => Array.from({ length: 6 }, (_, i) => {
+    const offset = i - 2; // Center around selected date
+    const date = addDays(baseDate, offset);
+    // Consistent pricing per date
+    const basePrice = 1200 + (date.getDate() * 17 + date.getMonth() * 31) % 400;
+    return { date, price: basePrice };
+  }), [baseDate]);
 
   const flights = useMemo(() => 
     generateFlights(origin.code, destination.code, selectedDateIndex),
@@ -109,19 +93,18 @@ const Flights = () => {
         </div>
       </header>
 
-      <div className="bg-avelo-purple-dark border-b border-avelo-purple">
-        <div className="max-w-md mx-auto flex justify-center gap-3 p-3">
+      <div className="bg-avelo-purple-dark border-b border-avelo-purple overflow-x-auto">
+        <div className="max-w-md mx-auto flex gap-2 p-2">
           {dates.map((item, idx) => (
             <button
               key={idx}
               onClick={() => handleDateSelect(idx)}
-              className={`px-5 py-3 rounded-lg text-sm transition-all active:scale-95 ${
+              className={`flex-shrink-0 px-4 py-2 rounded-lg text-sm whitespace-nowrap transition-all active:scale-95 ${
                 idx === selectedDateIndex
                   ? "bg-avelo-yellow text-avelo-purple font-semibold"
                   : "bg-white/10 text-white hover:bg-white/20"
               }`}
             >
-              <div className="text-xs opacity-80 mb-1">{item.label}</div>
               <div>{format(item.date, "EEE, MMM dd")}</div>
               <div className="font-semibold">${item.price.toLocaleString()}</div>
             </button>
