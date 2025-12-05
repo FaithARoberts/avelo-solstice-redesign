@@ -95,13 +95,13 @@ const Trips = () => {
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-8">
-                  <p className="text-white/80 font-body mb-4">No upcoming trips</p>
+              <div className="text-center py-8">
+                  <p className="text-white/80 font-body mb-6 text-lg">No upcoming trips</p>
                   <Button
                     onClick={() => navigate("/book")}
-                    className="bg-avelo-yellow text-avelo-purple font-heading rounded-2xl"
+                    className="bg-avelo-yellow text-avelo-purple font-heading rounded-2xl h-14 text-xl px-8"
                   >
-                    Book a Flight
+                    Book Your First Flight
                   </Button>
                 </div>
               )}

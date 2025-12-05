@@ -9,6 +9,7 @@ import airplaneInterior from "@/assets/airplane-interior.jpg";
 import { useBooking } from "@/contexts/BookingContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
+import PaymentCardSelector from "@/components/PaymentCardSelector";
 
 const Review = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const Review = () => {
   const { toast } = useToast();
   const [isCostSummaryOpen, setIsCostSummaryOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [showPaymentDialog, setShowPaymentDialog] = useState(false);
 
   const origin = currentBooking?.origin || { code: "ATL", city: "Atlanta, GA" };
   const destination = currentBooking?.destination || { code: "ALB", city: "Albany, NY" };
@@ -25,7 +27,7 @@ const Review = () => {
   const taxes = totalPrice * 0.11;
   const baseFare = totalPrice - taxes;
 
-  const handleConfirmBooking = async () => {
+  const handleConfirmClick = () => {
     if (!isAuthenticated || !user) {
       toast({
         title: "Login Required",
@@ -46,22 +48,27 @@ const Review = () => {
       return;
     }
 
+    setShowPaymentDialog(true);
+  };
+
+  const handlePaymentConfirm = async (card: { type: string; lastFour: string }) => {
     setIsProcessing(true);
 
     // Simulate payment processing
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
-    const booking = saveBooking(user.id);
+    const booking = saveBooking(user!.id);
 
     if (booking) {
+      setShowPaymentDialog(false);
       toast({
-        title: "Booking Confirmed!",
-        description: `Confirmation code: ${booking.confirmationCode}`,
+        title: "Payment Successful!",
+        description: `Paid with ${card.type} •••• ${card.lastFour}. Confirmation: ${booking.confirmationCode}`,
       });
       navigate("/booking-confirmation", { state: { booking } });
     } else {
       toast({
-        title: "Booking failed",
+        title: "Payment failed",
         description: "Please try again",
         variant: "destructive",
       });
@@ -199,11 +206,11 @@ const Review = () => {
           </Collapsible>
 
           <Button
-            onClick={handleConfirmBooking}
+            onClick={handleConfirmClick}
             disabled={isProcessing}
             className="w-full bg-avelo-yellow hover:bg-avelo-yellow/90 text-avelo-purple font-heading text-xl h-14 rounded-2xl mb-6 disabled:opacity-50"
           >
-            {isProcessing ? "Processing..." : "Confirm and Pay"}
+            Confirm and Pay
           </Button>
 
           <div className="relative rounded-2xl overflow-hidden mb-6">
@@ -220,6 +227,13 @@ const Review = () => {
           </div>
         </div>
       </main>
+
+      <PaymentCardSelector
+        open={showPaymentDialog}
+        onOpenChange={setShowPaymentDialog}
+        onConfirm={handlePaymentConfirm}
+        isProcessing={isProcessing}
+      />
 
       <BottomNav />
     </div>
