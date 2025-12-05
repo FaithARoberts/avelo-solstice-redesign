@@ -7,6 +7,7 @@ import QRCode from "react-qr-code";
 import { format } from "date-fns";
 import { useAuth } from "@/contexts/AuthContext";
 import { Booking } from "@/contexts/BookingContext";
+import { toast } from "sonner";
 
 const BoardingPass = () => {
   const location = useLocation();
@@ -81,7 +82,10 @@ const BoardingPass = () => {
           </div>
           
           {/* Action Buttons */}
-          <Button className="w-full h-12 bg-avelo-yellow text-avelo-purple font-heading text-xl rounded-2xl hover:bg-avelo-yellow/90">
+          <Button 
+            className="w-full h-12 bg-avelo-yellow text-avelo-purple font-heading text-xl rounded-2xl hover:bg-avelo-yellow/90"
+            onClick={() => toast.success("Boarding pass added to Apple Wallet!")}
+          >
             Add to Apple Wallet
           </Button>
           

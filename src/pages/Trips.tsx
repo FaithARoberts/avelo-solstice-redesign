@@ -41,7 +41,8 @@ const Trips = () => {
                   {upcomingBookings.map((booking) => (
                     <div
                       key={booking.id}
-                      className="bg-avelo-card-light rounded-2xl p-5"
+                      className="bg-avelo-card-light rounded-2xl p-5 cursor-pointer hover:bg-avelo-card-light/80 transition-colors"
+                      onClick={() => navigate("/boarding-pass", { state: { booking } })}
                     >
                       <div className="flex items-center justify-between mb-3">
                         <div>
