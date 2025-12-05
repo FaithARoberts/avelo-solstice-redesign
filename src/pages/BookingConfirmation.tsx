@@ -94,7 +94,7 @@ const BookingConfirmation = () => {
             <Button
               onClick={() => navigate("/book")}
               variant="outline"
-              className="w-full border-white text-white font-heading text-xl h-12 rounded-2xl hover:bg-white/10"
+              className="w-full bg-transparent border-2 border-avelo-yellow text-avelo-yellow font-heading text-xl h-12 rounded-2xl hover:bg-avelo-yellow/10"
             >
               Book Another Flight
             </Button>
