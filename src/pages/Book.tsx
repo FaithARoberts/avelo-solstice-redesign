@@ -198,7 +198,7 @@ const Book = () => {
               <Switch
                 checked={shopWithMiles}
                 onCheckedChange={setShopWithMiles}
-                className="data-[state=checked]:bg-avelo-purple"
+                className="data-[state=checked]:bg-avelo-yellow"
               />
             </div>
 
@@ -207,7 +207,7 @@ const Book = () => {
               <Switch
                 checked={excludeBasic}
                 onCheckedChange={setExcludeBasic}
-                className="data-[state=checked]:bg-avelo-purple"
+                className="data-[state=checked]:bg-avelo-yellow"
               />
             </div>
 
@@ -216,7 +216,7 @@ const Book = () => {
               <Switch
                 checked={lowestFares}
                 onCheckedChange={setLowestFares}
-                className="data-[state=checked]:bg-avelo-purple"
+                className="data-[state=checked]:bg-avelo-yellow"
               />
             </div>
           </div>
