@@ -17,35 +17,45 @@ import Autoplay from "embla-carousel-autoplay";
 const homeDeals = [
   {
     destination: "Miami",
-    code: "MIA",
+    destinationCode: "MIA",
+    origin: "New Haven",
+    originCode: "HVN",
     price: 89,
     tagline: "Escape to Paradise",
     image: "https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=800&q=80",
   },
   {
     destination: "Los Angeles",
-    code: "LAX",
+    destinationCode: "LAX",
+    origin: "Burbank",
+    originCode: "BUR",
     price: 79,
     tagline: "City of Angels Awaits",
     image: "https://images.unsplash.com/photo-1534190760961-74e8c1c5c3da?w=800&q=80",
   },
   {
     destination: "Las Vegas",
-    code: "LAS",
+    destinationCode: "LAS",
+    origin: "Burbank",
+    originCode: "BUR",
     price: 59,
     tagline: "Hit the Jackpot",
     image: "https://images.unsplash.com/photo-1605833556294-ea5c7a74f57d?w=800&q=80",
   },
   {
     destination: "Phoenix",
-    code: "PHX",
+    destinationCode: "PHX",
+    origin: "Burbank",
+    originCode: "BUR",
     price: 49,
     tagline: "Desert Adventure",
     image: "https://images.unsplash.com/photo-1558645836-e44122a743ee?w=800&q=80",
   },
   {
     destination: "Orlando",
-    code: "MCO",
+    destinationCode: "MCO",
+    origin: "New Haven",
+    originCode: "HVN",
     price: 99,
     tagline: "Theme Park Magic",
     image: "https://images.unsplash.com/photo-1575089976121-8ed7b2a54265?w=800&q=80",
@@ -69,15 +79,20 @@ const Home = () => {
   }, [api]);
 
   const handleDealClick = useCallback((deal: typeof homeDeals[0]) => {
+    // Set departure date to 7 days from now
+    const departureDate = new Date();
+    departureDate.setDate(departureDate.getDate() + 7);
+    const formattedDate = departureDate.toISOString().split('T')[0];
+    
     setCurrentBooking({
-      destination: { code: deal.code, city: deal.destination },
-      origin: { code: "", city: "" },
-      departureDate: null,
+      origin: { code: deal.originCode, city: deal.origin },
+      destination: { code: deal.destinationCode, city: deal.destination },
+      departureDate: formattedDate,
       returnDate: null,
       passengers: 1,
       tripType: "oneWay",
     });
-    navigate("/book");
+    navigate("/flights");
   }, [setCurrentBooking, navigate]);
 
   const generateMemberNumber = (id: string) => {
@@ -146,7 +161,7 @@ const Home = () => {
           >
             <CarouselContent>
               {homeDeals.map((deal) => (
-                <CarouselItem key={deal.code}>
+                <CarouselItem key={deal.destinationCode}>
                   <div 
                     className="relative rounded-2xl overflow-hidden cursor-pointer transform transition-transform hover:scale-[1.02] active:scale-[0.98]"
                     onClick={() => handleDealClick(deal)}
