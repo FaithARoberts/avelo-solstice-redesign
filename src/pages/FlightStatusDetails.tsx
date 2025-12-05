@@ -1,14 +1,27 @@
+import { useNavigate } from "react-router-dom";
 import PageHeader from "@/components/PageHeader";
 import BottomNav from "@/components/BottomNav";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const FlightStatusDetails = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-avelo-purple-dark flex flex-col">
       <PageHeader />
       
       <main className="flex-1 pb-24 px-4 pt-6">
+        <div className="flex items-center gap-3 mb-4">
+          <button
+            onClick={() => navigate("/flight-status")}
+            className="w-10 h-10 rounded-full bg-avelo-yellow flex items-center justify-center hover:bg-avelo-yellow/90"
+          >
+            <ArrowLeft className="w-5 h-5 text-black" />
+          </button>
+          <p className="text-xs text-white/70">Go Back</p>
+        </div>
+        
         <h1 className="text-[40px] font-heading font-semibold text-white mb-7">
           Flight status details
         </h1>
