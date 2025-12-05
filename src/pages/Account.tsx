@@ -165,7 +165,7 @@ const Account = () => {
       </main>
 
       <Dialog open={isPasswordDialogOpen} onOpenChange={setIsPasswordDialogOpen}>
-        <DialogContent className="bg-white rounded-2xl max-w-sm mx-4">
+        <DialogContent className="bg-white rounded-2xl max-w-sm mx-4 pointer-events-auto z-[100]">
           <DialogHeader>
             <DialogTitle className="text-xl font-heading text-avelo-purple">
               Change Password
