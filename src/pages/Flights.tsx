@@ -94,7 +94,7 @@ const Flights = () => {
       </header>
 
       <div className="bg-avelo-purple-dark border-b border-avelo-purple overflow-x-auto">
-        <div className="max-w-md mx-auto flex gap-2 p-2">
+        <div className="flex gap-2 p-2 px-4">
           {dates.map((item, idx) => (
             <button
               key={idx}
